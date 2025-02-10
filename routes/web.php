@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('login', [loginController::class, 'index'])->name('login');
+Route::post('logging-in', [LoginController::class, 'loggingIn'])->name('loggingin');
+Route::post('register-user', [LoginController::class, 'registerUser'])->name('registeruser');
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
+    Route::get('', [AdminController::class, 'index'])->name('index');
+    Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });

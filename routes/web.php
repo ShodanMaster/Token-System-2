@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CounterController;
+use App\Http\Controllers\Counter\CounterController as CounterCounterController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,9 @@ Route::middleware('auth:web')->prefix('admin')->name('admin.')->group(function()
     Route::get('clear-session', [AdminController::class, 'clearSession'])->name('clearsession');
 
     Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
+});
+
+Route::middleware('auth:counter')->prefix('counter')->name('counter.')->group(function(){
+    Route::get('', [CounterCounterController::class, 'index'])->name('index');
+    Route::get('get-token/{id}', [CounterCounterController::class, 'getToken'])->name('gettoken');
 });

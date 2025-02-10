@@ -27,8 +27,10 @@ class loginController extends Controller
 
             $rememberMe = $request->has('rememberMe');
 
-            if (auth()->attempt($credentials, $rememberMe)) {
+            if (auth()->guard('web')->attempt($credentials, $rememberMe)) {
                 return redirect()->route('admin.index')->with('success', 'Logged In');
+            } else if (auth()->guard('counter')->attempt($credentials, $rememberMe)) {
+                return redirect()->route('counter.index')->with('success', 'Logged In');
             } else {
                 return redirect()->back()->withInput()->with('error', 'Invalid credentials.');
             }

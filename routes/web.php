@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,11 @@ Route::post('register-user', [LoginController::class, 'registerUser'])->name('re
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
     Route::get('', [AdminController::class, 'index'])->name('index');
+
+    Route::get('counter', [CounterController::class, 'index'])->name('counter');
+    Route::get('create-counter', [CounterController::class, 'createCounter'])->name('createcounter');
+    Route::post('delete-counter', [CounterController::class, 'deleteCounter'])->name('deletecounter');
+    Route::post('update-status', [CounterController::class, 'updateStatus'])->name('updatestatus');
+
     Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });

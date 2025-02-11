@@ -13,7 +13,10 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>{{ Auth::guard('counter')->user()->name }}</h1>
+        <div class="d-flex justify-content-between">
+            <h1>{{ Auth::guard('counter')->user()->name }}</h1>
+            <a href="{{route('counter.loggingout')}}"><button class="btn btn-danger" type="button">Logout</button></a>
+        </div>
         <table class="table table-striped">
             <tr>
                 <th>Total Issued Tokens: </th>

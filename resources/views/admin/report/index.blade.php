@@ -21,7 +21,7 @@
                 <td>{{$report->last_went}}</td>
                 <td>{{$report->token_left}}</td>
                 <td>{{$report->date}}</td>
-                <td><a href="{{route('admin.detailedreport', encrypt($report->id))}}"><button class="btn btn-info">Details</button></a></td>
+                <td><a href="{{route('admin.detailedreport', encrypt($report->id))}}"><button class="btn btn-info">Detailed</button></a></td>
             </tr>
             @empty
                 <tr><td class="text-center text-muted" colspan="6"></td></tr>

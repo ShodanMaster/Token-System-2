@@ -44,7 +44,7 @@ Route::middleware('auth:web')->prefix('admin')->name('admin.')->group(function()
     Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });
 
-Route::middleware('auth:counter')->prefix('counter')->name('counter.')->group(function(){
+Route::middleware(['auth:counter', 'counterclosed'])->prefix('counter')->name('counter.')->group(function(){
     Route::get('', [CounterCounterController::class, 'index'])->name('index');
     Route::get('get-token/{id}', [CounterCounterController::class, 'getToken'])->name('gettoken');
 
@@ -52,3 +52,7 @@ Route::middleware('auth:counter')->prefix('counter')->name('counter.')->group(fu
 
     Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });
+
+Route::get('closed-counter', function(){
+    return view('closedcounter');
+})->name('closedcounter');

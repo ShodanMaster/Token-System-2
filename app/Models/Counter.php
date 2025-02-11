@@ -11,4 +11,7 @@ class Counter extends Authenticatable
 
     protected $guarded = [];
 
+    public function tokens(){
+        return $this->hasMany(CounterToken::class);
+    }
 }

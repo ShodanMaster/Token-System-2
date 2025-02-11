@@ -64,7 +64,6 @@
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching token data:', error);
-                alert('There was an error fetching the token data.');
             }
         });
     }
@@ -72,7 +71,7 @@
     $(document).ready(function() {
         updateTokenData();
 
-        setInterval(updateTokenData, 1000);
+        setInterval(updateTokenData, 2000);
     });
 
     $(document).on('submit', '#tokenForm', function (e) {

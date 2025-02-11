@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Counter;
 
 use App\Http\Controllers\Controller;
+use App\Models\CounterToken;
 use App\Models\Token;
 use Carbon\Carbon;
 use Exception;
@@ -30,7 +31,6 @@ class CounterController extends Controller
                 ], 404);
             }
 
-
             if ($token->total_token == 0 || $token->total_token == $token->last_went) {
                 return response()->json([
                     'status' => 404,
@@ -43,7 +43,14 @@ class CounterController extends Controller
 
             $token->increment('last_went');
 
+            // dd($token);
+            CounterToken::create([
+                'counter_id' => decrypt($id),
+                'token_number' => $token->last_went,
+            ]);
+            
             $tokenLeft = $token->total_token - $token->last_went;
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Token Retrieved',

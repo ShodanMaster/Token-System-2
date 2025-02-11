@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CounterController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Counter\CounterController as CounterCounterController;
 use App\Http\Controllers\loginController;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,9 @@ Route::middleware('auth:web')->prefix('admin')->name('admin.')->group(function()
 
     Route::post('add-token', [AdminController::class, 'addToken'])->name('addtoken');
     Route::get('issue-token', [AdminController::class, 'issueToken'])->name('issuetoken');
-    Route::get('clear-session', [AdminController::class, 'clearSession'])->name('clearsession');
 
+    Route::get('report', [ReportController::class, 'index'])->name('report');
+    Route::get('detailed-report/{id}', [ReportController::class, 'detailedReport'])->name('detailedreport');
     Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });
 

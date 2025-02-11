@@ -109,13 +109,4 @@ class AdminController extends Controller
             ], 500);
         }
     }
-
-    public function clearSession(){
-        session()->forget(['last_went', 'total_token', ]);
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Session Cleared',
-        ]);
-    }
 }

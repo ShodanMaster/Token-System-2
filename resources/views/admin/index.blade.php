@@ -42,13 +42,39 @@
             </a>
         </div>
     </div>
-
-    <div class="d-flex justify-content-end mt-5">
-        <button class="btn btn-danger btn-sm" id="clearSession">Clear Session</button>
-    </div>
 @endsection
 @section('scripts')
 <script>
+
+    function updateTokenData() {
+        // Perform the AJAX request when the page loads
+        $.ajax({
+            url: "{{route('admin.gettoken')}}",  // Adjust the URL according to your actual API route
+            type: 'GET',
+            success: function(data) {
+                if (data.status === 200) {
+                    // If the data is returned successfully, update the UI
+                    $('#totalTokens').text(data.data.total);
+                    $('#lastWent').text(data.data.last_went);
+                    $('#tokenLeft').text(data.data.token_left);
+                } else {
+                    // Handle case where no token is found (e.g., no token for today)
+                    alert(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching token data:', error);
+                alert('There was an error fetching the token data.');
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        updateTokenData();
+
+        setInterval(updateTokenData, 1000);
+    });
+
     $(document).on('submit', '#tokenForm', function (e) {
         e.preventDefault();
 
@@ -118,34 +144,6 @@
                 alert('An error occurred: ' + error);
             }
         });
-    });
-
-    $(document).on('click', '#clearSession', function (e) {
-        e.preventDefault();
-
-        if (confirm('Sure Clear Session?')) {
-            $.ajax({
-                type: "GET",
-                url: "{{route('admin.clearsession')}}",
-                success: function (response) {
-                    if (response.status === 200) {
-                        alert(response.message);
-
-                        updateTokenDisplay(0,0);
-
-                        // Reset counters
-                        for (var i = 1; i <= 4; i++) {
-                            $('#counter' + i + 'Token').text('No Token');
-                        }
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error: " + error);
-
-                    alert('Alert : ' + error);
-                }
-            });
-        }
     });
 
 </script>

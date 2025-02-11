@@ -28,6 +28,8 @@ Route::post('register-user', [LoginController::class, 'registerUser'])->name('re
 Route::middleware('auth:web')->prefix('admin')->name('admin.')->group(function(){
     Route::get('', [AdminController::class, 'index'])->name('index');
 
+    Route::get('get-token', [AdminController::class, 'getToken'])->name('gettoken');
+
     Route::get('counter', [CounterController::class, 'index'])->name('counter');
     Route::get('create-counter', [CounterController::class, 'createCounter'])->name('createcounter');
     Route::post('delete-counter', [CounterController::class, 'deleteCounter'])->name('deletecounter');
@@ -43,4 +45,8 @@ Route::middleware('auth:web')->prefix('admin')->name('admin.')->group(function()
 Route::middleware('auth:counter')->prefix('counter')->name('counter.')->group(function(){
     Route::get('', [CounterCounterController::class, 'index'])->name('index');
     Route::get('get-token/{id}', [CounterCounterController::class, 'getToken'])->name('gettoken');
+
+    Route::get('get-token-info', [CounterCounterController::class, 'getTokenInfo'])->name('gettokeninfo');
+
+    Route::get('logging-out', [LoginController::class, 'loggingOut'])->name('loggingout');
 });

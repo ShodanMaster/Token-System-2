@@ -97,6 +97,6 @@ class CounterController extends Controller
         $lastCounter = Counter::orderBy('id', 'desc')->first();
 
         $nextNumber = $lastCounter ? (substr($lastCounter->name, -1) + 1) : 1;
-        return 'Counter ' . $nextNumber;
+        return 'Counter-' . $nextNumber;
     }
 }

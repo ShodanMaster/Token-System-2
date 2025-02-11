@@ -24,7 +24,7 @@
                         <a class="nav-link {{ Route::is('admin.counter') ? 'active' : '' }} text-white" aria-current="page" href="{{route('admin.counter')}}">Counter</a>
                     </li>
                 </ul>
-                    <a href="{{route('admin.loggingout')}}"><button class="btn btn-outline-danger" type="button">Logout</button></a>
+                    <a href="{{route('admin.loggingout')}}"><button class="btn btn-danger" type="button">Logout</button></a>
             </div>
         </div>
     </nav>
